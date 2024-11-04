@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { MobileSize } from "@/components";
 
 // Import Templates
-import Sidebar from "@/templates/sidebar";
+import Sidebar from "@/pages/templates/sidebar";
 
 // Import Sections
 import OrderSection from "./order";
