@@ -18,6 +18,7 @@ import useHandleResize from "@/utils/handleResize";
 
 const HomePage = () => {
   // State
+  const [open, setOpen] = useState<boolean>(true)  
   const [activeComponent, setActiveComponent] = useState<string>("user")
   const isDesktop = useHandleResize()
   
@@ -37,8 +38,8 @@ const HomePage = () => {
     <>
       {isDesktop ? (
         <div className="flex fixed">
-          <Sidebar page="home" onMenuClick={handleComponentChange} />
-          {activeComponent === "user" && <UserSection />}
+          <Sidebar page="home" onMenuClick={handleComponentChange} open={open} setOpen={setOpen}/>
+          {activeComponent === "user" && <UserSection open={open} />}
           {activeComponent === "order" && <OrderSection />}
           {activeComponent === "logout" && <Logout />}
         </div>

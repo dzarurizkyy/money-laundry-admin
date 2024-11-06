@@ -11,13 +11,14 @@ import { HeaderSidebar, MenusSideBar, Collapsible } from "@/components"
 
 // Props
 type SidebarProps = {
+  open: boolean;
+  setOpen: (value: boolean) => void;
   page: string;
   onMenuClick: (component: string) => void
 }
 
-const Sidebar = ({page, onMenuClick} : SidebarProps) => {
+const Sidebar = ({page, onMenuClick, open, setOpen} : SidebarProps) => {
   // State 
-  const [open, setOpen] = useState<any>(null)  
   const [activeMenu, setActiveMenu] = useState<string>(page)
 
   // Variable
