@@ -174,7 +174,7 @@ const UserSection = ({open} : UserSection) => {
             </thead>
             <tbody>
               {users.map((user, index) => (
-                <tr className={`${index % 2 === 0 ? "bg-[#F7F8FC]" : "bg-white"}  text-center`}>
+                <tr className={`${index % 2 === 0 ? "bg-[#F7F8FC]" : "bg-white"}  text-center`} key={index}>
                   <td>{user.name}</td>
                   <td>{user.email}</td>
                   <td className="flex justify-center items-center h-[84px]">
