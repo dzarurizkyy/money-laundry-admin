@@ -1,20 +1,20 @@
 // Import Packages
-import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
+import { useState, useEffect } from "react"
+import { useRouter } from "next/router"
 
 // Import Components
-import { MobileSize } from "@/components";
+import { MobileSize } from "@/components"
 
 // Import Templates
-import Sidebar from "@/pages/templates/sidebar";
+import Sidebar from "../templates/sidebar"
 
 // Import Sections
-import OrderSection from "./order";
-import UserSection from "./user";
-import Logout from "./logout";
+import OrderSection from "./order"
+import UserSection from "./user"
+import Logout from "./logout"
 
 // Import Functions
-import useHandleResize from "@/utils/handleResize";
+import useHandleResize from "@/utils/handleResize"
 
 const HomePage = () => {
   // State
