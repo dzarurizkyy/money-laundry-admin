@@ -1,41 +1,41 @@
 // Import Packages
 import { useState } from "react"
-
+import { useRouter } from "next/router"
+import { useSidebar } from '@/context/sidebarContext'
 // Import Icons
 import { RiUserSearchLine, RiUserSearchFill, RiLogoutCircleRFill} from "react-icons/ri"
-import { IoCartOutline, IoCart } from "react-icons/io5"
 import { AiOutlineLogout } from "react-icons/ai"
+import { HiHome, HiOutlineHome } from "react-icons/hi";
 
 // Import Components
 import { HeaderSidebar, MenusSideBar, Collapsible } from "@/components"
 
-// Props
 type SidebarProps = {
-  open: boolean;
-  setOpen: (value: boolean) => void;
-  page: string;
-  onMenuClick: (component: string) => void
+  page: string
 }
 
-const Sidebar = ({page, onMenuClick, open, setOpen} : SidebarProps) => {
+// Props
+const Sidebar = ({page}:SidebarProps) => {
   // State 
-  const [activeMenu, setActiveMenu] = useState<string>(page)
+  const {open, setOpen} = useSidebar();
+  const router = useRouter()
+  const [activeMenu, setActiveMenu] = useState<string>(`${page}`)
 
   // Variable
   const menus = [
-    {title: "User Management", icon: <RiUserSearchLine />, activeIcon: <RiUserSearchFill />, href: "user"},
-    {title: "Order Management", icon: <IoCartOutline />, activeIcon: <IoCart />, href: "order"},
-    {title: "Logout", icon: <AiOutlineLogout />, activeIcon: <RiLogoutCircleRFill />, gap: true, href: "logout"},
+    {title: "Home", icon: <HiOutlineHome/>, activeIcon: <HiHome />, href: "/home"},
+    {title: "User Management", icon: <RiUserSearchLine />, activeIcon: <RiUserSearchFill />, href: "/home/user"},
+    {title: "Logout", icon: <AiOutlineLogout />, activeIcon: <RiLogoutCircleRFill />, gap: true, href: "/home/logout"},
   ]
 
   // Function
   const handleMenuClick = (href: string) => {
     setActiveMenu(href)
-    onMenuClick(href)
+    router.push(href)
   }
-
+  
   return (
-    <div className={`${open ? "w-72" : "w-20"} p-5 pt-8 h-screen bg-[#03242F] relative duration-300`}>
+    <div className={`${open ? "w-72" : "w-20"} p-5 pt-8 h-screen bg-[#121A24] relative duration-300`}>
       <Collapsible open={open} setOpen={setOpen}/>
       <HeaderSidebar open={open} />
       <MenusSideBar open={open} activeMenu={activeMenu} menus={menus} handleMenuClick={handleMenuClick}/>

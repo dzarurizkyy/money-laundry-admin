@@ -16,14 +16,14 @@ const Password = ({value, onChange}: PasswordProps) => {
         <div>
           <input 
             type={(passwordVisible === false ? 'password' : 'text')} 
-            className="bg-[#F3F3F3] rounded-2xl p-3 text-sm w-full" 
+            className="bg-[#232E3E] text-[#FDFDFD] rounded-2xl p-3 text-sm w-full" 
             placeholder="Password"
             value={value}
             onChange={onChange} />
         </div>
         {/* Icon */}
-        <div className="text-xl absolute top-3 right-4 cursor-pointer">
-          {(passwordVisible === false) ?  <IoEyeOffOutline onClick={toggle} /> : <IoEyeOutline onClick={toggle} />}
+        <div className="text-xl absolute top-3 right-4 cursor-pointer text-[#758299]">
+          {(passwordVisible === false) ?  <IoEyeOffOutline onClick={toggle}/> : <IoEyeOutline onClick={toggle} />}
         </div>
    </div>
   )

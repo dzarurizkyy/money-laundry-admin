@@ -5,3 +5,13 @@
 * {
   font-family: "Montserrat", "Arial";
 }
+
+#scrollbar {
+  scrollbar-color: #2c384a #121A24;
+}
+
+.swal2-popup {
+  border: 1px solid #F0F1F2;
+  border-radius: 20px;
+  color: #F0F1F2;
+}

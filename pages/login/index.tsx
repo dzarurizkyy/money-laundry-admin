@@ -32,12 +32,12 @@ const LoginPage = () => {
     e.preventDefault()
 
     if(emailInput === email && passwordInput === password) {
-      toast.success("Login Success! Redirecting...");
+      toast.success("Login Success! Redirecting...", { style: { fontSize: "13px", backgroundColor: "#18212E", color: "#F0F1F2", border: "2px solid #F0F1F2"}});
       if(rememberMe) {localStorage.setItem("rememberMe", "true")}
       localStorage.setItem("login", "true")
       setTimeout(() => {router.push("/home")}, 2000)
     } else {
-      toast.error("Incorect email or password...");
+      toast.error("Incorect email or password...", { style: { fontSize: "13px", backgroundColor: "#18212E", color: "#F0F1F2", border: "2px solid #F0F1F2"}});
     }
   }
 
@@ -51,14 +51,10 @@ const LoginPage = () => {
     <>
       {isDesktop ? (
         <div className="flex flex-row justify-center items-center h-screen">
-          {/* Left */}
-          <div className="flex flex-col w-[66%] h-full justify-center items-center">
-            <img src="Login.jpg" alt="Laundry Background" className="w-full h-full object-center" />
-          </div>
-          {/* Right */}
-          <div className="flex flex-col w-[44%] h-full justify-center items-center">
+          <div className="flex flex-col w-full h-full justify-center items-center bg-[#121A24]">
             {/* Title */}
-            <div className="font-extrabold text-xl mb-9">Sign in to MoneyLaundry</div>
+            <div className="w-16 h-16 mb-4"><img src="Icon.png"></img></div>
+            <div className="font-extrabold text-xl mb-9 text-[#FDFDFD]">Sign in to MoneyLaundry</div>
             {/* Form */}
             <form onSubmit={handleLogin} className="flex flex-col gap-5 w-80" >
               <Email value={emailInput} onChange={(e) => setEmailInput(e.target.value)} />

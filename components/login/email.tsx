@@ -7,7 +7,7 @@ const Email = ({value, onChange}: EmailProps) => {
   return (
     <input 
       type="email" 
-      className="bg-[#F3F3F3] rounded-2xl p-3 text-sm" 
+      className="bg-[#232E3E] text-[#FDFDFD] rounded-2xl p-3 text-sm" 
       placeholder="Email"
       value={value}
       onChange={onChange} />

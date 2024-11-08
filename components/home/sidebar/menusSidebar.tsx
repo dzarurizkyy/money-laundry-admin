@@ -2,13 +2,13 @@ type MenusSideBarProps = {
   open: boolean
   activeMenu: string;
   menus: Array<{title: string, icon: JSX.Element; activeIcon: JSX.Element; href: string; gap?: boolean}>
-  handleMenuClick: (href: string) => void
+  handleMenuClick: (href: string) => void,
 }
 
 const MenusSideBar = ({menus, activeMenu, open, handleMenuClick} : MenusSideBarProps) => {
   return (
     <ul className="pt-8 relative h-full">
-      {menus.map((menu, index) => (
+      {menus && menus.map((menu, index) => (
         <li 
           key={index} 
           className={`flex items-center text-gray-300 text-base w-full p-2 mb-2 gap-3 cursor-pointer hover:bg-slate-700 rounded-md ${menu.gap && "absolute bottom-8"}`}

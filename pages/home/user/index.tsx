@@ -1,22 +1,24 @@
 import { useState, useEffect } from "react";
-import Table from "../templates/table";
+import Table from "@/pages/templates/table";
 import Swal from 'sweetalert2'
 import userResponse from "@/dummy/userResponse";
+import orderResponse from "@/dummy/orderResponse";
+import Sidebar from "@/pages/templates/sidebar";
 
-type UserSection = {open: boolean}
-
-const UserSection = ({open} : UserSection) => {
+const UserSection = () => {
     // States
     const [users, setUsers] = useState(userResponse.data)
     const [search, setSearch] = useState<string>("")
 
+    const orders = orderResponse.data
+
     // Variables
     const userFilterBy = ["free", "paid"]
     const userSortBy = ["newest", "oldest"]
-    const userColumn = ["name", "email", "status", "created at", "updated at", "action"]
+    const userColumn = ["name", "email", "status", "created_at", "updated_at", "action"]
 
     // Functions
-    const changeStatusUser = (id: string) => {
+    const changeStatusUser = (id: number) => {
       Swal.fire({
         title: "User Status",
         text: "Are you sure you want to change the user status to paid?",
@@ -25,7 +27,8 @@ const UserSection = ({open} : UserSection) => {
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, change it",
-        width: "600px"
+        width: "600px",
+        background: "#18212E",
       }).then((result) => {
         if (result.isConfirmed) {
           const updatedUsers = users && users.map(user => user.id === id && user.status !== "paid" ? { ...user, status: "paid" } : user)
@@ -35,20 +38,22 @@ const UserSection = ({open} : UserSection) => {
             Swal.fire({
               title: "Changed!",
               text: "The user status has been changed to paid.",
-              icon: "success"
+              icon: "success",
+              background: "#18212E",
             });
           } else {
             Swal.fire({
               title: "No Change!",
               text: "No changes were made to the user status.",
-              icon: "error"
+              icon: "error",
+              background: "#18212E",
             });
           }
         }
       });
     }
 
-    const deleteUser = (id: string) => {
+    const deleteUser = (id: number) => {
       Swal.fire({
         title: "Delete User",
         text: "Are you sure you want to delete this user?",
@@ -57,7 +62,8 @@ const UserSection = ({open} : UserSection) => {
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, delete user",
-        width: "600px"
+        width: "600px",
+        background: "#18212E",
       }).then((result) => {
         if (result.isConfirmed) {
           const updatedUsers =  users.filter(user => user.id !== id)
@@ -66,7 +72,8 @@ const UserSection = ({open} : UserSection) => {
           Swal.fire({
             title: "Deleted!",
             text: "The user has been succesfully deleted.",
-            icon: "success"
+            icon: "success",
+            background: "#18212E",
           });
         }
       });
@@ -104,21 +111,24 @@ const UserSection = ({open} : UserSection) => {
         setUsers(searching)  
       }
     }, [search])
-
+    
   return (
-    <Table 
-      option={"user"} 
-      open={open} 
-      search={search} 
-      handleSearch={handleSearch}
-      filtering={filterUser}
-      filterBy={userFilterBy}
-      sortBy={userSortBy}
-      columns={userColumn}
-      users={users}
-      changeStatusUser={changeStatusUser}
-      deleteUser={deleteUser}
-      />
+    <div className="flex fixed">
+      <Sidebar page="/home/user"/>
+      <Table 
+        option={"user"} 
+        search={search} 
+        handleSearch={handleSearch}
+        filtering={filterUser}
+        filterBy={userFilterBy}
+        sortBy={userSortBy}
+        columns={userColumn}
+        users={users}
+        changeStatusUser={changeStatusUser}
+        deleteUser={deleteUser}
+        orders={orders}
+        />
+    </div>
   )
 }
 

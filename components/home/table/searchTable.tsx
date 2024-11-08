@@ -15,7 +15,7 @@ const SearchTable = ({title, search, handleSearch} : SearchTable) => {
           name="search"
           placeholder={`Search ${title}...`}
           autoComplete="off"
-          className="w-full px-3 py-2 pl-10 font-semibold placeholder-gray-400 text-black text-sm rounded-md bg-[#F7F8FC] focus:ring-gray-500 focus:ring-2 focus:outline-none" 
+          className="w-full px-3 py-2 pl-10 font-semibold placeholder-gray-400 text-[#F0EAD2] text-sm rounded-md bg-[#232E3E] focus:ring-gray-500 focus:ring-2 focus:outline-none" 
           value={search}
           onChange={handleSearch} />
       </div>
