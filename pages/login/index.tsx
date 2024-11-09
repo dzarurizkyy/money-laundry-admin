@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
+import axios from "axios"
 
 // Import Libraries
 import { ToastContainer, toast } from "react-toastify"
@@ -25,22 +26,43 @@ const LoginPage = () => {
   // Router
   const router = useRouter()
 
-  // Credential
-  const email = "moneylaundry@gmail.com"
-  const password = "moneylaundry2024"
-
   // Function
   const rememberLogin = (value: boolean) => setRememberMe(value)
-  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if(emailInput === email && passwordInput === password) {
-      toast.success("Login Success! Redirecting...", { style: { fontSize: "13px", backgroundColor: "#18212E", color: "#F0F1F2", border: "2px solid #F0F1F2"}});
-      if(rememberMe) {localStorage.setItem("rememberMe", "true")}
-      localStorage.setItem("login", "true")
-      setTimeout(() => {router.push("/home")}, 2000)
-    } else {
-      toast.error("Incorect email or password...", { style: { fontSize: "13px", backgroundColor: "#18212E", color: "#F0F1F2", border: "2px solid #F0F1F2"}});
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/api/admin/login', {
+        email: emailInput,
+        password: passwordInput
+      })
+      
+      if(response.status === 200) {
+        toast.success("Login Success! Redirecting...", { 
+          style: { 
+            fontSize: "13px", 
+            backgroundColor: "#18212E", 
+            color: "#F0F1F2", 
+            border: "2px solid #F0F1F2"
+          }
+        });
+        
+        if(rememberMe) {
+          localStorage.setItem("rememberMe", "true")
+        }
+        localStorage.setItem("login", "true")
+        setTimeout(() => {router.push("/home")}, 2000)
+      }
+    } catch (error) {
+      console.log("err", error)
+      toast.error("Incorrect email or password...", { 
+        style: { 
+          fontSize: "13px", 
+          backgroundColor: "#18212E", 
+          color: "#F0F1F2", 
+          border: "2px solid #F0F1F2"
+        }
+      });
     }
   }
 
@@ -72,7 +94,6 @@ const LoginPage = () => {
         <MobileSize />
       )}
     </>
-
   );
 }
 
