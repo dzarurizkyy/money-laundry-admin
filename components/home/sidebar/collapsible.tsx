@@ -1,7 +1,7 @@
 import { FaAngleLeft } from "react-icons/fa"
 
 type CollapsibleProps = {
-  open: boolean;
+  open: boolean
   setOpen: (value: boolean) => void
 }
 

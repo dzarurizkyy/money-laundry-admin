@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { useRouter } from "next/router";
+import { useEffect } from "react"
+import { useRouter } from "next/navigation"
 
 const Logout = () => {
   const router = useRouter()
@@ -8,7 +8,7 @@ const Logout = () => {
     localStorage.removeItem("login")
     localStorage.removeItem("rememberMe")
     router.push("/login")
-  }, [])
+  }, [router])
   
   return null
 }

@@ -1,6 +1,6 @@
 type EmailProps = {
-  value: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const Email = ({value, onChange}: EmailProps) => {

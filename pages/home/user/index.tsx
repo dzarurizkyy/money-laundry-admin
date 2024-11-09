@@ -1,22 +1,41 @@
-import { useState, useEffect } from "react";
-import Table from "@/pages/templates/table";
-import Swal from 'sweetalert2'
-import userResponse from "@/dummy/userResponse";
-import orderResponse from "@/dummy/orderResponse";
-import Sidebar from "@/pages/templates/sidebar";
+// Import Packages
+import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
+
+// Import Libraries
+import Swal from "sweetalert2"
+
+// Import Components
+import { MobileSize } from "@/components"
+
+// Import Templates
+import Sidebar from "@/pages/templates/sidebar"
+import Table from "@/pages/templates/table"
+
+// Import Functions
+import useHandleResize from "@/utils/handleResize"
+
+// Import Responses
+import userResponse from "@/dummy/userResponse"
+import orderResponse from "@/dummy/orderResponse"
 
 const UserSection = () => {
     // States
-    const [users, setUsers] = useState(userResponse.data)
-    const [search, setSearch] = useState<string>("")
-
-    const orders = orderResponse.data
+    const [users, setUsers]                 = useState(userResponse.data)
+    const [filteredUsers, setFilteredUsers] = useState(userResponse.data)
+    const [search, setSearch]               = useState<string>("")
 
     // Variables
     const userFilterBy = ["free", "paid"]
-    const userSortBy = ["newest", "oldest"]
-    const userColumn = ["name", "email", "status", "created_at", "updated_at", "action"]
+    const userSortBy   = ["newest", "oldest"]
+    const userColumn   = ["name", "email", "status", "created_at", "updated_at", "action"]
 
+    // Util
+    const isDesktop = useHandleResize()
+  
+    // Router
+    const router = useRouter()
+  
     // Functions
     const changeStatusUser = (id: number) => {
       Swal.fire({
@@ -53,6 +72,10 @@ const UserSection = () => {
       });
     }
 
+    const handleUserOrder = (id: number) => {
+      router.push(`/home/user/order/${id}`)  
+    }
+
     const deleteUser = (id: number) => {
       Swal.fire({
         title: "Delete User",
@@ -82,19 +105,19 @@ const UserSection = () => {
     const filterUser = (option: string) => {  
       switch(option) {
         case "paid" : 
-          setUsers(userResponse.data.filter(user => user.status === "paid"))
+          setFilteredUsers(userResponse.data.filter(user => user.status === "paid"))
           break;
         case "free" :
-          setUsers(userResponse.data.filter(user => user.status === "free"))
+          setFilteredUsers(userResponse.data.filter(user => user.status === "free"))
           break;
         case "newest" :
-          setUsers([...userResponse.data].sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()))
+          setFilteredUsers([...userResponse.data].sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()))
           break;
         case "oldest" :
-          setUsers([...userResponse.data].sort((a, b) => new Date(a.updated_at).getTime() - new Date(b.updated_at).getTime()))
+          setFilteredUsers([...userResponse.data].sort((a, b) => new Date(a.updated_at).getTime() - new Date(b.updated_at).getTime()))
           break;
         default :
-         setUsers(userResponse.data)
+         setFilteredUsers(userResponse.data)
       }
     }
 
@@ -104,32 +127,46 @@ const UserSection = () => {
     
     // Effect
     useEffect(() => {
+      const login = localStorage.getItem("login")
+      if(login !== "true"){router.push("/login")}
+    }, [router])
+  
+    useEffect(() => {
       if(search === "") {
-        setUsers(userResponse.data)
+        setFilteredUsers(userResponse.data)
       } else {
         const searching = users.filter(user => user.name.toLowerCase().includes(search.toLowerCase()))      
-        setUsers(searching)  
+        setFilteredUsers(searching)  
       }
-    }, [search])
+    }, [search, users])
     
+    // Undefined
+    const orders = orderResponse.data
   return (
-    <div className="flex fixed">
-      <Sidebar page="/home/user"/>
-      <Table 
-        option={"user"} 
-        search={search} 
-        handleSearch={handleSearch}
-        filtering={filterUser}
-        filterBy={userFilterBy}
-        sortBy={userSortBy}
-        columns={userColumn}
-        users={users}
-        changeStatusUser={changeStatusUser}
-        deleteUser={deleteUser}
-        orders={orders}
-        />
-    </div>
+    <>
+      {isDesktop ? (
+        <div className="flex fixed">
+          <Sidebar page="/home/user"/>
+          <Table 
+            option={"user"} 
+            search={search} 
+            handleSearch={handleSearch}
+            filtering={filterUser}
+            filterBy={userFilterBy}
+            sortBy={userSortBy}
+            columns={userColumn}
+            users={filteredUsers}
+            changeStatusUser={changeStatusUser}
+            handleUserOrder={handleUserOrder}
+            deleteUser={deleteUser}
+            orders={orders}
+            />
+        </div>
+      ) : (
+        <MobileSize />
+      )}
+    </>
   )
 }
 
-export default UserSection;
+export default UserSection

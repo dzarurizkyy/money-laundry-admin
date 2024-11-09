@@ -1,8 +1,8 @@
 type MenusSideBarProps = {
   open: boolean
-  activeMenu: string;
+  activeMenu: string
   menus: Array<{title: string, icon: JSX.Element; activeIcon: JSX.Element; href: string; gap?: boolean}>
-  handleMenuClick: (href: string) => void,
+  handleMenuClick: (href: string) => void
 }
 
 const MenusSideBar = ({menus, activeMenu, open, handleMenuClick} : MenusSideBarProps) => {

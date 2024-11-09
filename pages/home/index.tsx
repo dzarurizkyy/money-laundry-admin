@@ -1,6 +1,6 @@
 // Import Packages
-import { useState, useEffect } from "react"
-import { useRouter } from "next/router"
+import { useEffect } from "react"
+import { useRouter } from "next/navigation"
 
 // Import Components
 import { MobileSize } from "@/components"
@@ -12,7 +12,7 @@ import Sidebar from "../templates/sidebar"
 import useHandleResize from "@/utils/handleResize"
 
 const HomePage = () => {
-  // State
+  // Util
   const isDesktop = useHandleResize()
   
   // Router
@@ -22,7 +22,7 @@ const HomePage = () => {
   useEffect(() => {
     const login = localStorage.getItem("login")
     if(login !== "true"){router.push("/login")}
-  }, [])
+  }, [router])
   
 
   return (
@@ -35,9 +35,8 @@ const HomePage = () => {
       ) : (
         <MobileSize />
       )}
-      
     </>
   )
 }
 
-export default HomePage;
+export default HomePage

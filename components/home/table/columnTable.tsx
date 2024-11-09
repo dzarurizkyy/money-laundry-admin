@@ -1,6 +1,4 @@
-type ColumnTableProps  = {
-  columns: Array<string>
-}
+type ColumnTableProps  = {columns: Array<string>}
 
 const ColumnTable = ({columns}: ColumnTableProps) => {
   return (

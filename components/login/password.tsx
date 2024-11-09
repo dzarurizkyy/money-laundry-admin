@@ -1,8 +1,8 @@
-import React, {useState} from "react"
-import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
+import { useState } from "react"
+import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5"
 
 type PasswordProps = {
-  value: string,
+  value: string
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 

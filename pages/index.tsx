@@ -8,7 +8,7 @@ const Index: NextPage = () => {
   useEffect(() => {
     const login = localStorage.getItem("login")
     login ? router.push("/home") : router.push("/login")
-  }, [])
+  }, [router])
 
   return null
 };

@@ -1,20 +1,15 @@
 import { GiPadlockOpen } from "react-icons/gi"
 import { MdDeleteForever } from "react-icons/md"
-import { FaShoppingCart } from "react-icons/fa";
-import { useRouter } from "next/router";
+import { FaShoppingCart } from "react-icons/fa"
 
 type UserTableProps = {
-  users: Array<{id: number, name: string, email: string, status: string, created_at: string, updated_at: string}>,
-  changeStatusUser: (id: number) => void,
-  deleteUser: (id: number) => void,
+  users: Array<{id: number, name: string, email: string, status: string, created_at: string, updated_at: string}>
+  changeStatusUser: (id: number) => void
+  handleUserOrder: (id: number) => void
+  deleteUser: (id: number) => void
 }
 
-const UserTable = ({users, changeStatusUser, deleteUser} : UserTableProps) => {
-  const router = useRouter()
-  const handleShoppingCartClick = (userId: number) => {
-    router.push(`/home/user/order/${userId}`)    
-  }
-
+const UserTable = ({users, changeStatusUser, handleUserOrder, deleteUser} : UserTableProps) => {
   return (
     <tbody>
       {users.map((user, index) => (
@@ -32,7 +27,7 @@ const UserTable = ({users, changeStatusUser, deleteUser} : UserTableProps) => {
           <td>{user.updated_at.split("T")[0]}</td>
           <td className="flex justify-center items-center gap-2">
             {[...Array(3)].map((_, index) => (
-              <div className={`w-12 h-9 ${index === 0 ? "bg-[#216BFE]" : index === 1 ? "bg-[#FEB421]" : "bg-[#FF5771]"} text-white flex justify-center items-center rounded-md hover:brightness-125 cursor-pointer duration-300`} onClick={() => index === 0 ? changeStatusUser(user.id) : index === 1 ? handleShoppingCartClick(user.id) : deleteUser(user.id)} key={index}>
+              <div className={`w-12 h-9 ${index === 0 ? "bg-[#216BFE]" : index === 1 ? "bg-[#FEB421]" : "bg-[#FF5771]"} text-white flex justify-center items-center rounded-md hover:brightness-125 cursor-pointer duration-300`} onClick={() => index === 0 ? changeStatusUser(user.id) : index === 1 ? handleUserOrder(user.id) : deleteUser(user.id)} key={index}>
                 {index === 0 ? <GiPadlockOpen /> : index === 1 ? <FaShoppingCart/> : <MdDeleteForever />}
               </div>
             ))}

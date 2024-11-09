@@ -1,22 +1,25 @@
 // Import Packages
-import React, {useState, useEffect} from "react"
-import { useRouter } from "next/router";
+import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
+import Image from "next/image"
 
 // Import Libraries
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 // Import Components
-import { Email, Password, RememberMe, Submit, MobileSize } from "@/components";
+import { Email, Password, RememberMe, Submit, MobileSize } from "@/components"
 
 // Import Functions
-import useHandleResize from "@/utils/handleResize";
+import useHandleResize from "@/utils/handleResize"
 
 const LoginPage = () => {
   // State
   const [emailInput, setEmailInput] = useState<string>("")
   const [passwordInput, setPasswordInput] = useState<string>("")
   const [rememberMe, setRememberMe] = useState<boolean>(false)
+  
+  // Util
   const isDesktop = useHandleResize()
 
   // Router
@@ -45,7 +48,7 @@ const LoginPage = () => {
   useEffect(() => {
     const remember = localStorage.getItem("rememberMe");
     if (remember === "true") {setRememberMe(true); router.push("/home")}
-  }, [])
+  }, [router])
 
   return (
     <>
@@ -53,7 +56,7 @@ const LoginPage = () => {
         <div className="flex flex-row justify-center items-center h-screen">
           <div className="flex flex-col w-full h-full justify-center items-center bg-[#121A24]">
             {/* Title */}
-            <div className="w-16 h-16 mb-4"><img src="Icon.png"></img></div>
+            <div className="w-16 h-16 mb-4"><Image src="/Icon.png" width={100} height={100} alt="MoneyLaundry Icon" /></div>
             <div className="font-extrabold text-xl mb-9 text-[#FDFDFD]">Sign in to MoneyLaundry</div>
             {/* Form */}
             <form onSubmit={handleLogin} className="flex flex-col gap-5 w-80" >
@@ -74,4 +77,4 @@ const LoginPage = () => {
 }
 
 // Export
-export default LoginPage;
+export default LoginPage

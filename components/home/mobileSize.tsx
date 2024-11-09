@@ -1,4 +1,4 @@
-import { TiWarning } from "react-icons/ti";
+import { TiWarning } from "react-icons/ti"
 
 const MobileSize = () => {
   return (
