@@ -6,8 +6,7 @@ import { useRouter } from "next/navigation"
 import { MobileSize } from "@/components"
 
 // Import Templates
-import Table from "@/pages/templates/table"
-import Sidebar from "@/pages/templates/sidebar"
+import { Sidebar, Table } from "@/pages/templates"
 
 // Import Functions
 import useHandleResize from "@/utils/handleResize"
@@ -17,12 +16,12 @@ import orderResponse from "@/dummy/orderResponse"
 import userResponse from "@/dummy/userResponse"
 
 const OrderSection = () => {
-  // States
+  // State
   const [orders] = useState(orderResponse.data)
   const [search, setSearch] = useState<string>("")
   const [filteredOrders, setFilteredOrders] = useState(orderResponse.data)
 
-  // Variables
+  // Variable
   const orderFilterBy = ["baru", "proses", "selesai", "belum", "lunas"]
   const orderSortBy   = ["terbaru", "terlama"]
   const orderColumn   = ["name", "quantity", "weight", "status", "order_date", "payment", "total_price"]
@@ -33,7 +32,7 @@ const OrderSection = () => {
   // Router
   const router = useRouter()
 
-  // Functions
+  // Function
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value)
   }

@@ -6,7 +6,7 @@ type SearchTable = {
   handleSearch: (value: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const SearchTable = ({title, search, handleSearch} : SearchTable) => {
+const SearchTable = ({ title, search, handleSearch } : SearchTable) => {
   return (
     <div className="relative flex items-center text-gray-400 w-72 focus-within:text-gray-600">
       <IoMdSearch className="w-5 h-5 absolute ml-3 pointer-events-none"/>

@@ -12,7 +12,6 @@ const Password = ({value, onChange}: PasswordProps) => {
 
   return (
      <div className="relative">
-        {/* Input */}
         <div>
           <input 
             type={(passwordVisible === false ? 'password' : 'text')} 
@@ -21,7 +20,6 @@ const Password = ({value, onChange}: PasswordProps) => {
             value={value}
             onChange={onChange} />
         </div>
-        {/* Icon */}
         <div className="text-xl absolute top-3 right-4 cursor-pointer text-[#758299]">
           {(passwordVisible === false) ?  <IoEyeOffOutline onClick={toggle}/> : <IoEyeOutline onClick={toggle} />}
         </div>

@@ -7,23 +7,22 @@ import { BsPersonCheck } from "react-icons/bs"
 import { TbShoppingBagCheck } from "react-icons/tb"
 import { HiOutlineBanknotes } from "react-icons/hi2"
 
-// Import Contexts
-import { useSidebar } from "@/context/sidebarContext"
-
 // Import Components
 import { MobileSize } from "@/components"
 
 // Import Templates
-import Sidebar from "../templates/sidebar"
-import Home from "../templates/home"
+import { Sidebar, Home } from "@/pages/templates"
+
+// Import Contexts
+import { useSidebar } from "@/context/sidebarContext"
 
 // Import Functions
 import useHandleResize from "@/utils/handleResize"
+import rupiachCurrencyFormat from "@/utils/rupiahCurrencyFormat"
 
 // Import Responses
 import transactionResponse from "@/dummy/transactionResponse"
 import statusUserResponse from "@/dummy/statusUserResponse"
-
 
 const HomePage = () => {
   // Context
@@ -32,22 +31,22 @@ const HomePage = () => {
   // Variable
   const cardData = [
     {
-      title: "Transaction",
+      title: "Transactions",
       icon: <TbShoppingBagCheck />,
-      selectedData: 130,
-      totalData: 140
+      selectedData: String(130),
+      totalData: String(140)
     },
     {
-      title: "Paid",
+      title: "Transaction Members",
       icon: <BsPersonCheck />,
-      selectedData: 233,
-      totalData: 310
+      selectedData: String(0),
+      totalData: String(310)
     },
     {
-      title: "Income",
+      title: "Incomes",
       icon: <HiOutlineBanknotes />,
-      selectedData: 0,
-      totalData: 100000
+      selectedData: String(0),
+      totalData: rupiachCurrencyFormat(100000)
     }
   ]
 

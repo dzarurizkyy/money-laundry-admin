@@ -6,7 +6,7 @@ type WeeklyTransactionChartProps = {
   transactions: Array<{monday: number, tuesday: number, wednesday: number, thursday: number, friday: number, saturday: number, sunday: number}>
 }
 
-const WeeklyTransactionChart = ({transactions} : WeeklyTransactionChartProps) => {
+const WeeklyTransactionChart = ({ transactions } : WeeklyTransactionChartProps) => {
   const chartRef = useRef<HTMLCanvasElement>(null)
   const chartInstance = useRef<Chart | null>(null)
   const transactionName = transactions && transactions.map(transaction => Object.keys(transaction).map(key => key.charAt(0).toUpperCase() + key.slice(1)))
@@ -56,7 +56,7 @@ const WeeklyTransactionChart = ({transactions} : WeeklyTransactionChartProps) =>
             },
             plugins: {
               legend: {
-                display: false // This line disables the legend labels
+                display: false
               },
               title: {
                 display: true,

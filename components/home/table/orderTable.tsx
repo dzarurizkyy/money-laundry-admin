@@ -4,7 +4,7 @@ type OrderTableProps = {
   orders: Array<{id: number, name: string, order_date: string, status: string, payment: string, weight: number, total_price: number, quantity: number}>
 }
 
-const OrderTable = ({orders} : OrderTableProps) => {
+const OrderTable = ({ orders } : OrderTableProps) => {
   return (
     <tbody>
       {orders && orders.map((order, index) => (

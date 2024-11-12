@@ -9,8 +9,7 @@ import Swal from "sweetalert2"
 import { MobileSize } from "@/components"
 
 // Import Templates
-import Sidebar from "@/pages/templates/sidebar"
-import Table from "@/pages/templates/table"
+import { Sidebar, Table } from "@/pages/templates"
 
 // Import Functions
 import useHandleResize from "@/utils/handleResize"
@@ -20,12 +19,12 @@ import userResponse from "@/dummy/userResponse"
 import orderResponse from "@/dummy/orderResponse"
 
 const UserSection = () => {
-    // States
+    // State
     const [users, setUsers]                 = useState(userResponse.data)
     const [filteredUsers, setFilteredUsers] = useState(userResponse.data)
     const [search, setSearch]               = useState<string>("")
 
-    // Variables
+    // Variable
     const userFilterBy = ["free", "paid"]
     const userSortBy   = ["newest", "oldest"]
     const userColumn   = ["name", "email", "status", "created_at", "updated_at", "action"]
@@ -36,7 +35,7 @@ const UserSection = () => {
     // Router
     const router = useRouter()
   
-    // Functions
+    // Function
     const changeStatusUser = (id: number) => {
       Swal.fire({
         title: "User Status",

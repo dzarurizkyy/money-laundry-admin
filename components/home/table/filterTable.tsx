@@ -6,13 +6,11 @@ type FilterTableProps = {
   sortBy: (value: string) => void
 }
 
-const FilterTable =  ({title, sortName, sortBy} : FilterTableProps) => {
+const FilterTable =  ({ title, sortName, sortBy } : FilterTableProps) => {
   return (
     <div>
       <button className="relative flex justify-center items-center bg-[#232E3E] text-gray-400 text-sm rounded-md hover:brightness-150 focus:outline-none focus:ring-gray-500 focus:ring-1 group">
-        {/* Title */}
         <div className="px-5 py-2">{title}</div><span className="pr-4"><IoIosArrowDown /></span>
-        {/* Dropdown */}
         <div className="absolute hidden group-focus:block top-full w-full bg-[#232E3E] text-[#FEFEFE] mt-2">
           <ul className="text-left border border-[#555C69] rounded-[4px] shadow">
             {sortName && sortName.map((list, index) => (

@@ -2,11 +2,9 @@ import { useEffect, useRef } from "react"
 import Chart from "chart.js/auto"
 import { TooltipItem } from "chart.js"
 
-type UserDistributionChartProps = {
-  distributions: Array<{free: number, paid: number}>
-}
+type UserDistributionChartProps = {distributions: Array<{free: number, paid: number}>}
 
-const UserDistributionChart = ({distributions} : UserDistributionChartProps) => {
+const UserDistributionChart = ({ distributions } : UserDistributionChartProps) => {
   const chartRef = useRef<HTMLCanvasElement>(null)
   const chartInstance = useRef<Chart<'pie', number[], string> | null>(null)
 

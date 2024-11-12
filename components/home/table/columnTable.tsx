@@ -1,6 +1,6 @@
 type ColumnTableProps  = {columns: Array<string>}
 
-const ColumnTable = ({columns}: ColumnTableProps) => {
+const ColumnTable = ({ columns }: ColumnTableProps) => {
   return (
     <thead className="border-b-2 border-[#03242F] text-[#CACCCF] text-center">
       <tr>

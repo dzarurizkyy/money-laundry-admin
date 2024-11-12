@@ -9,7 +9,7 @@ type UserTableProps = {
   deleteUser: (id: number) => void
 }
 
-const UserTable = ({users, changeStatusUser, handleUserOrder, deleteUser} : UserTableProps) => {
+const UserTable = ({ users, changeStatusUser, handleUserOrder, deleteUser } : UserTableProps) => {
   return (
     <tbody>
       {users.map((user, index) => (

@@ -1,39 +1,25 @@
-// Import Packages
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-
-// Import Contexts
 import { useSidebar } from "@/context/sidebarContext"
-
-// Import Icons
 import { RiUserSearchLine, RiUserSearchFill, RiLogoutCircleRFill} from "react-icons/ri"
 import { AiOutlineLogout } from "react-icons/ai"
-import { HiHome, HiOutlineHome } from "react-icons/hi";
-
-// Import Components
+import { HiHome, HiOutlineHome } from "react-icons/hi"
 import { HeaderSidebar, MenusSideBar, Collapsible } from "@/components"
 
-// Props
-type SidebarProps = {page: string}
+type SidebarProps = { page: string }
 
-const Sidebar = ({page}:SidebarProps) => {
-  // Context
+const Sidebar = ({ page } : SidebarProps) => {
   const {open, setOpen} = useSidebar();
-  
-  // State 
   const [activeMenu, setActiveMenu] = useState<string>(`${page}`)
-
-  // Router
+  
   const router = useRouter()
-
-  // Variable
+  
   const menus = [
     {title: "Home", icon: <HiOutlineHome/>, activeIcon: <HiHome />, href: "/home"},
     {title: "User Management", icon: <RiUserSearchLine />, activeIcon: <RiUserSearchFill />, href: "/home/user"},
     {title: "Logout", icon: <AiOutlineLogout />, activeIcon: <RiLogoutCircleRFill />, gap: true, href: "/home/logout"},
   ]
 
-  // Function
   const handleMenuClick = (href: string) => {setActiveMenu(href); router.push(href)}
   
   return (
@@ -46,4 +32,3 @@ const Sidebar = ({page}:SidebarProps) => {
 }
 
 export default Sidebar
-

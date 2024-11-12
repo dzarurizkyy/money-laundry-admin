@@ -5,7 +5,7 @@ type MenusSideBarProps = {
   handleMenuClick: (href: string) => void
 }
 
-const MenusSideBar = ({menus, activeMenu, open, handleMenuClick} : MenusSideBarProps) => {
+const MenusSideBar = ({ menus, activeMenu, open, handleMenuClick } : MenusSideBarProps) => {
   return (
     <ul className="pt-8 relative h-full">
       {menus && menus.map((menu, index) => (

@@ -1,6 +1,6 @@
-import { NextPage } from "next";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
+import { NextPage } from "next"
+import { useEffect } from "react"
+import { useRouter } from "next/router"
 
 const Index: NextPage = () => {
   const router = useRouter()
@@ -13,4 +13,4 @@ const Index: NextPage = () => {
   return null
 };
 
-export default Index;
+export default Index

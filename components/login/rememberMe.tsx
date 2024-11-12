@@ -10,7 +10,6 @@ const RememberMe = ({rememberLogin}: RememberMeProps) => {
 
   return (
     <div className="flex flex-row items-center gap-2 mt-3">
-      {/* Button */}
       <label className="relative flex items-center cursor-pointer" htmlFor="rememberMe">
         <input
           type="radio"
@@ -20,8 +19,9 @@ const RememberMe = ({rememberLogin}: RememberMeProps) => {
         />
         <span className="absolute bg-slate-400 w-3 h-3 rounded-full opacity-0 peer-checked:opacity-100 transition-opacity duration-200 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></span>
       </label>
-      {/* Text */}
-      <label className="text-xs font-semibold cursor-pointer text-gray-400" htmlFor="rememberMe">Remember Me</label>
+      <label className="text-xs font-semibold cursor-pointer text-gray-400" htmlFor="rememberMe">
+        Remember Me
+      </label>
     </div>
   )
 }
