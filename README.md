@@ -1,52 +1,87 @@
-# money-laundry-web
+# Money Laundry Admin Website 🫧👕
+This is an admin website designed for managing and monitoring operations of Money Laundry App. This website is built using Next JS and Tailwind CSS.
 
-🎉 Congratulations, your project was successfully generated with [Create Next Stack](https://www.create-next-stack.com/)!
+## Libraries Used 📚
+- [React Icons](https://react-icons.github.io/react-icons/)                         : A library that provides a collection of popular icons for React.
+- [React Toastify](https://fkhadra.github.io/react-toastify/installation/)          : A library for easy notifications using toast messages in React.
+- [SweetAlert2](https://sweetalert2.github.io/#download)                            : A library to create beautiful, customizable alerts and modals.
+- [Chart.js](https://www.chartjs.org/docs/latest/getting-started/installation.html) : A library for creating interactive and customizable charts and graphs.
 
-To get started, run:
+## Related Repositories 🔗
+- [Money Laundry App](https://github.com/Bahauddinnafis/money-laundry-mobile) 📱
+- [Money Laundry API](https://github.com/RaflyAmartharizqi/money-laundry-api) 🛠️
 
-```bash
-npm run dev
+## Getting Started 🚀
+- <h3>Clone this repository</h3>
+
+  ```
+  https://github.com/dzarurizkyy/money-laundry-admin
+  ```
+
+- <h3>Create .env.local File</h3>
+
+  ```
+  NEXT_PUBLIC_URL={coming soon}
+  ```
+
+- <h3>Install Node.js (If Not Installed)</h3>
+
+  - You can download and install Node.js from the official [Node.js website](https://nodejs.org/en).
+  - Make sure to install the LTS version for stability.
+
+- <h3>Install Project Dependencies</h3>
+
+  ```
+  npm install
+  ```
+
+- <h3>Build Project</h3>
+
+  ```
+  npm build
+  ```
+
+- <h3>Start Development Server</h3>
+
+  ```
+  npm start
+  ```
+
+## Routes 📍
+
+  Route                    | Description                                             
+|--------------------------|---------------------------------------------------------|
+| `/login`                 | Route for user login.                                   |
+| `/home`                  | Displays statistics Money Laundry App.                  |
+| `/home/user`             | User management section.                                |
+| `/home/user/order/{id}`  | View detailed information on a specific user order.     |
+
+## Project Structure 📂
+
+```
+ project-root/
+  ├── components/       # Reusable UI components
+  ├── context/          # Global state management
+  ├── dummy/            # Example API responses
+  ├── pages/            # Page components for different views 
+      ├── templates/    # Template pages
+  ├── utils/            # Utils function
+  ├── public/           # Publicly accessible files
+  ├── styles/           # Stylesheets 
 ```
 
-## Final Steps
+## Screenshots 📸
+- <h3>Login Page</h3>
+  <p><img src="https://i.ibb.co.com/chYMPT9/Screenshot-2024-11-11-094951.png" alt="Screenshot-2024-11-11-094951" width="700"></p>
 
-There are a few final steps that we were not able to perform automatically. We have provided a complete list for you below. You should take care of these before you can start developing your project. You can delete each item from the list as you go along.
+- <h3>Home Page</h3>
+  <p><img src="https://i.ibb.co.com/bPBgCjH/Screenshot-2024-11-11-121040.png" alt="Screenshot-2024-11-11-094951" width="700"></p>
 
-### To do:
+- <h3>Detail Page</h3>
+  <p><img src="https://i.ibb.co.com/TMF4cFR/Screenshot-2024-11-11-095415.png" width="700"></p>
 
-- Integrate Vercel with your repository host for continuous deployments at https://vercel.com/new
+- <h3>Confirmation Alert</h3>
+   <p><img src="https://i.ibb.co.com/bN0zFb7/Screenshot-2024-11-11-095259.png" width="700"></p>
 
-## Scripts
-
-The table below provides names and descriptions of the npm scripts available in this project.
-
-Each script is run using `npm run <script-name>`. For example: `npm run dev`.
-
-| Name            | Description                                                                    |
-| --------------- | ------------------------------------------------------------------------------ |
-| `test`          | Runs tests                                                                     |
-| `dev`           | Runs the Next.js development server.                                           |
-| `build`         | Generates a production build.                                                  |
-| `start`         | Runs the Next.js production server built using `build` script.                 |
-| `lint`          | Runs [ESLint](https://eslint.org/) to catch linting errors in the source code. |
-| `format`        | Formats all source code in the project.                                        |
-| `format:check`  | Checks the formatting of all code in the project.                              |
-| `deploy:vercel` | Deploy a preview deployment to Vercel                                          |
-
-## Technologies
-
-The table below gives an overview of the technologies used in this project, as well as places to learn more about them.
-
-| Name            | Links                                                                                                                                                                                                           |
-| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Next.js         | [Website](https://nextjs.org/) - [Docs](https://nextjs.org/docs) - [Learn Next.js](https://nextjs.org/learn) - [GitHub](https://github.com/vercel/next.js) - [Wikipedia](https://en.wikipedia.org/wiki/Next.js) |
-| React           | [Website](https://reactjs.org/) - [Docs](https://reactjs.org/docs/getting-started.html) - [GitHub](https://github.com/facebook/react) - [Wikipedia](<https://en.wikipedia.org/wiki/React_(JavaScript_library)>) |
-| TypeScript      | [Website](https://www.typescriptlang.org/) - [Docs](https://www.typescriptlang.org/docs/) - [GitHub](https://github.com/microsoft/TypeScript) - [Wikipedia](https://en.wikipedia.org/wiki/TypeScript)           |
-| Tailwind CSS    | [Website](https://tailwindcss.com/) - [Docs](https://tailwindcss.com/docs) - [GitHub](https://github.com/tailwindlabs/tailwindcss)                                                                              |
-| React Hook Form | [Website](https://react-hook-form.com/) - [Docs](https://react-hook-form.com/get-started) - [GitHub](https://github.com/react-hook-form/react-hook-form)                                                        |
-| React Query     | [Website](https://tanstack.com/query/latest) - [Docs](https://tanstack.com/query/latest/docs/react/overview) - [GitHub](https://github.com/tanstack/query)                                                      |
-| ESLint          | [Website](https://eslint.org/) - [Configuration](https://eslint.org/docs/user-guide/configuring/) - [Rules](https://eslint.org/docs/rules/) - [GitHub](https://github.com/eslint/eslint)                        |
-| Prettier        | [Website](https://prettier.io/) - [Docs](https://prettier.io/docs/en/index.html) - [Options](https://prettier.io/docs/en/options.html) - [GitHub](https://github.com/prettier/prettier)                         |
-| npm             | [Website](https://www.npmjs.com/) - [Docs](https://docs.npmjs.com/) - [GitHub](https://github.com/npm/cli)                                                                                                      |
-| GitHub Actions  | [Website](https://github.com/features/actions) - [Docs](https://docs.github.com/en/actions) - [Workflow syntax](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions)                |
-| Vercel          | [Website](https://vercel.com/) - [Docs](https://vercel.com/docs) - [CLI Docs](https://vercel.com/docs/cli)                                                                                                      |
+## Contributor  🤝
+- [Dzaru Rizky Fathan Fortuna](https://www.linkedin.com/in/dzarurizky/)
