@@ -81,7 +81,8 @@ This is an admin website designed for managing and monitoring operations of Mone
   <p><img src="https://i.ibb.co.com/TMF4cFR/Screenshot-2024-11-11-095415.png" width="700"></p>
 
 - <h3>Confirmation Alert</h3>
-   <p><img src="https://i.ibb.co.com/bN0zFb7/Screenshot-2024-11-11-095259.png" width="700"></p>
+  <p><img src="https://i.ibb.co.com/d2nwSPY/Screenshot-2024-11-12-193126.png" width="700"></a></p>
+   
 
 ## Contributor  🤝
 - [Dzaru Rizky Fathan Fortuna](https://www.linkedin.com/in/dzarurizky/)
