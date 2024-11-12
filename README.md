@@ -15,7 +15,7 @@ This is an admin website designed for managing and monitoring operations of Mone
 - <h3>Clone this repository</h3>
 
   ```
-  https://github.com/dzarurizkyy/money-laundry-admin
+  git clone https://github.com/dzarurizkyy/money-laundry-admin
   ```
 
 - <h3>Create .env.local File</h3>
