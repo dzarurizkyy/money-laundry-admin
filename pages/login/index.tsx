@@ -39,6 +39,8 @@ const LoginPage = () => {
         password: passInput
       })
       
+      console.log("res :", response)
+
       if(response.status === 200) {
         toast.success("Login Success! Redirecting...", { 
           style: { 
