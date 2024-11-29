@@ -26,7 +26,7 @@ import statusUserResponse from "@/dummy/statusUserResponse"
 
 const HomePage = () => {
   // Context
-  const {open} = useSidebar()
+  const { open } = useSidebar()
 
   // Variable
   const cardData = [
@@ -52,14 +52,14 @@ const HomePage = () => {
 
   // Util
   const isDesktop = useHandleResize()
- 
+
   // Router
   const router = useRouter()
 
   // Effect
   useEffect(() => {
     const login = localStorage.getItem("login")
-    if(login !== "true"){router.push("/login")}
+    if (login !== "true") { router.push("/login") }
   }, [router])
 
   return (

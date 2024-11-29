@@ -13,7 +13,16 @@ import useHandleResize from "@/utils/handleResize"
 
 // Import Responses
 import orderResponse from "@/dummy/orderResponse"
-import userResponse from "@/dummy/userResponse"
+
+// Interface
+interface User {
+  users_id: number,
+  name: string,
+  email: string,
+  account_status: { name: string },
+  created_at: string,
+  updated_at: string,
+}
 
 const OrderSection = () => {
   // State
@@ -81,7 +90,7 @@ const OrderSection = () => {
   }, [search, orders])
 
   // Undefined
-  const [users] = useState(userResponse.data)
+  const [users] = useState<User[]>([])
   const changeStatusUser = () => {}
   const deleteUser = () => {}
   const handleUserOrder = () => {}
@@ -100,6 +109,7 @@ const OrderSection = () => {
             sortBy={orderSortBy}
             columns={orderColumn}
             users={users}
+            totalUser={0}
             changeStatusUser={changeStatusUser}
             handleUserOrder={handleUserOrder}
             deleteUser={deleteUser}

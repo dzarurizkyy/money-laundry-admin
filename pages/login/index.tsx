@@ -55,6 +55,8 @@ const LoginPage = () => {
           localStorage.setItem("rememberMe", "true")
         }
 
+        const token = response.data.data.token
+        localStorage.setItem("token", token)
         localStorage.setItem("login", "true")
         setTimeout(() => {router.push("/home")}, 2000)
       }
