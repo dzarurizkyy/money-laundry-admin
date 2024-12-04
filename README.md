@@ -21,7 +21,7 @@ This is an admin website designed for managing and monitoring operations of Mone
 - <h3>Create .env.local File</h3>
 
   ```
-  NEXT_PUBLIC_URL={coming soon}
+  NEXT_PUBLIC_URL={https://moneylaundry.bimbelhimalaya.com/api}
   ```
 
 - <h3>Install Node.js (If Not Installed)</h3>
@@ -62,7 +62,6 @@ This is an admin website designed for managing and monitoring operations of Mone
  project-root/
   ├── components/       # Reusable UI components
   ├── context/          # Global state management
-  ├── dummy/            # Example API responses
   ├── pages/            # Page components for different views 
       ├── templates/    # Template pages
   ├── utils/            # Utils function
