@@ -1,6 +1,9 @@
 // Import Packages
-import { useState, useEffect } from "react"
-import { useRouter } from "next/navigation"
+import { useState, useEffect, useCallback } from "react"
+import { useRouter } from "next/router"
+
+// Import Libraries
+import axios from "axios"
 
 // Import Components
 import { MobileSize } from "@/components"
@@ -11,8 +14,8 @@ import { Sidebar, Table } from "@/pages/templates"
 // Import Functions
 import useHandleResize from "@/utils/handleResize"
 
-// Import Responses
-import orderResponse from "@/dummy/orderResponse"
+// Import Context
+import { useAuth } from "@/context/authContext"
 
 // Interface
 interface User {
@@ -24,85 +27,114 @@ interface User {
   updated_at: string,
 }
 
+interface Orders {
+  transaction_order_id: number,
+  package_laundry: { name: string },
+  quantity: number,
+  weight: number,
+  status: string,
+  order_date: string,
+  payment_status: string,
+  total_price: number
+}
+
 const OrderSection = () => {
+  // Router
+  const router = useRouter()
+
   // State
-  const [orders] = useState(orderResponse.data)
+  const { token } = useAuth()
+
+  const [userID, setUserID] = useState<string>("")
+  const [orders, setOrders] = useState<Orders[]>([])
   const [search, setSearch] = useState<string>("")
-  const [filteredOrders, setFilteredOrders] = useState(orderResponse.data)
+  const [filteredOrders, setFilteredOrders] = useState(orders)
 
   // Variable
   const orderFilterBy = ["baru", "proses", "selesai", "belum", "lunas"]
-  const orderSortBy   = ["terbaru", "terlama"]
-  const orderColumn   = ["name", "quantity", "weight", "status", "order_date", "payment", "total_price"]
-  
+  const orderSortBy = ["terbaru", "terlama"]
+  const orderColumn = ["name", "quantity", "weight", "status", "order_date", "payment", "total_price"]
+
+  const getOrders = useCallback(async () => {
+    try {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_URL}/admin/transaction-order/${userID}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      console.log("res:", response)
+      setOrders(response.data.data.transaction_order)
+    } catch (error) {
+      console.log(error)
+    }
+  }, [token, userID])
+
   // Util
   const isDesktop = useHandleResize()
-
-  // Router
-  const router = useRouter()
 
   // Function
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value)
   }
-  
+
   const filterOrder = (option: string) => {
-    switch(option) {
-      case "baru" :
-        setFilteredOrders(orders.filter(order => order.status === "baru"))
+    switch (option) {
+      case "baru":
+        setFilteredOrders(orders.filter(order => order.status === "new"))
         break;
-      case "proses" :
-        setFilteredOrders(orders.filter(order => order.status === "proses"))
+      case "proses":
+        setFilteredOrders(orders.filter(order => order.status === "process"))
         break;
-      case "selesai" :
-        setFilteredOrders(orders.filter(order => order.status === "selesai"))
+      case "selesai":
+        setFilteredOrders(orders.filter(order => order.status === "done"))
         break;
-      case "belum" :
-        setFilteredOrders(orders.filter(order => order.payment === "belum"))
+      case "belum":
+        setFilteredOrders(orders.filter(order => order.payment_status === "unpaid"))
         break;
-      case "lunas" :
-        setFilteredOrders(orders.filter(order => order.payment === "lunas"))
+      case "lunas":
+        setFilteredOrders(orders.filter(order => order.payment_status === "paid"))
         break;
-      case "terbaru" :
+      case "terbaru":
         setFilteredOrders([...orders].sort((a, b) => new Date(b.order_date).getTime() - new Date(a.order_date).getTime()))
         break;
-      case "terlama" :
+      case "terlama":
         setFilteredOrders([...orders].sort((a, b) => new Date(a.order_date).getTime() - new Date(b.order_date).getTime()))
         break;
-      default :
+      default:
         setFilteredOrders(orders)
     }
-  } 
+  }
 
   // Effect
   useEffect(() => {
     const login = localStorage.getItem("login")
-    if(login !== "true"){router.push("/login")}
-  }, [router])
+    if (login !== "true") { router.push("/login") }
+    setUserID(String(router.query.slug))
+    getOrders()
+  }, [router, getOrders])
 
   useEffect(() => {
-    if(search === "") {
+    if (search === "") {
       setFilteredOrders(orders)
     } else {
-      const searching = orders.filter(order => order.name.toLowerCase().includes(search.toLowerCase()))      
-      setFilteredOrders(searching)  
+      const searching = orders.filter(order => order.package_laundry.name.toLowerCase().includes(search.toLowerCase()))
+      setFilteredOrders(searching)
     }
   }, [search, orders])
-
   // Undefined
   const [users] = useState<User[]>([])
-  const changeStatusUser = () => {}
-  const deleteUser = () => {}
-  const handleUserOrder = () => {}
+  const changeStatusUser = () => { }
+  const deleteUser = () => { }
+  const handleUserOrder = () => { }
 
   return (
     <>
       {isDesktop ? (
         <div className="flex fixed">
           <Sidebar page="/home/user" />
-          <Table 
-            option={"order"} 
-            search={search} 
+          <Table
+            option={"order"}
+            search={search}
             handleSearch={handleSearch}
             filtering={filterOrder}
             filterBy={orderFilterBy}

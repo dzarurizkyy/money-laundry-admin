@@ -15,9 +15,6 @@ import { Sidebar, Table } from "@/pages/templates"
 // Import Functions
 import useHandleResize from "@/utils/handleResize"
 
-// Import Responses
-import orderResponse from "@/dummy/orderResponse"
-
 // Import Context
 import { useAuth } from "@/context/authContext"
 
@@ -29,6 +26,16 @@ interface User {
   account_status: { name: string },
   created_at: string,
   updated_at: string,
+}
+interface Orders {
+  transaction_order_id: number,
+  package_laundry: { name: string },
+  quantity: number,
+  weight: number,
+  status: string,
+  order_date: string,
+  payment_status: string,
+  total_price: number
 }
 
 const UserSection = () => {
@@ -230,7 +237,7 @@ const UserSection = () => {
   }, [search, users])
 
   // Undefined
-  const orders = orderResponse.data
+  const [orders] = useState<Orders[]>([])
   return (
     <>
       {isDesktop ? (
