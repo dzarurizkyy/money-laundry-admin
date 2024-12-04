@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Head from "next/head";
 
-// Import SidebarProvider
+// Import Provider
 import { SidebarProvider } from '@/context/sidebarContext';
 import { AuthProvider } from "@/context/authContext";
 
@@ -19,7 +19,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         <title>Money Laundry » Admin</title>
       </Head>
       <AuthProvider>
-        <SidebarProvider> {/* Wrap the app with SidebarProvider */}
+        <SidebarProvider> 
           <ReactQueryDevtools />
           <Component {...pageProps} />
         </SidebarProvider>

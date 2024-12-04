@@ -1,7 +1,16 @@
 import rupiachCurrencyFormat from "@/utils/rupiahCurrencyFormat"
 
 type OrderTableProps = {
-  orders: Array<{ transaction_order_id: number, package_laundry: { name: string }, quantity: number, weight: number, status: string, order_date: string, payment_status: string, total_price: number }>
+  orders: Array<{
+    transaction_order_id: number,
+    package_laundry: { name: string },
+    quantity: number,
+    weight: number,
+    status: string,
+    order_date: string,
+    payment_status: string,
+    total_price: number
+  }>
 }
 
 const OrderTable = ({ orders }: OrderTableProps) => {

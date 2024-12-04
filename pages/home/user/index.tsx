@@ -18,7 +18,7 @@ import useHandleResize from "@/utils/handleResize"
 // Import Context
 import { useAuth } from "@/context/authContext"
 
-// Interface
+// Interfaces
 interface User {
   users_id: number,
   name: string,
@@ -39,39 +39,41 @@ interface Orders {
 }
 
 const UserSection = () => {
+  // Router
+  const router = useRouter()
+
+  // Context
+  const { token } = useAuth()
+
+  // Util
+  const isDesktop = useHandleResize()
+
   // State
   const [users, setUsers] = useState<User[]>([])
   const [totalUser, setTotalUser] = useState<number>(0)
   const [filteredUsers, setFilteredUsers] = useState<User[]>([])
   const [search, setSearch] = useState<string>("")
-  const { token } = useAuth()
 
   // Variable
   const userFilterBy = ["free", "paid"]
   const userSortBy = ["newest", "oldest"]
   const userColumn = ["name", "email", "status", "created_at", "updated_at", "action"]
 
-  // Util
-  const isDesktop = useHandleResize()
-
-  // Router
-  const router = useRouter()
-
-  // Function
+  // Axios
   const getUsers = useCallback(async () => {
     try {
       const response = await axios.get(`${process.env.NEXT_PUBLIC_URL}/admin/user`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      });
-      setUsers(response.data.data.users);
-      setFilteredUsers(response.data.data.users);
-      setTotalUser(response.data.data.total_data);
+      })
+      setUsers(response.data.data.users)
+      setFilteredUsers(response.data.data.users)
+      setTotalUser(response.data.data.total_data)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  }, [token]);
+  }, [token])
 
   const changeStatusUser = async (id: number) => {
     const user = users.find(user => user.users_id === id);
@@ -82,7 +84,7 @@ const UserSection = () => {
         icon: "error",
         background: "#18212E",
       });
-      return;
+      return
     }
 
     Swal.fire({
@@ -105,8 +107,8 @@ const UserSection = () => {
       confirmButtonColor: "#3085D6"
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const element = document.getElementById("subscription") as HTMLSelectElement;
-        const price = element?.value === "1" ? 50000 : 130000;
+        const element = document.getElementById("subscription") as HTMLSelectElement
+        const price = element?.value === "1" ? 50000 : 130000
 
         try {
           const response = await axios.post(`${process.env.NEXT_PUBLIC_URL}/admin/transaction-member`,
@@ -120,10 +122,10 @@ const UserSection = () => {
                 Authorization: `Bearer ${token}`
               }
             }
-          );
+          )
 
           if (response.status === 200) {
-            getUsers();
+            getUsers()
             Swal.fire({
               title: "Changed!",
               text: "The user status has been changed to paid.",
@@ -139,14 +141,10 @@ const UserSection = () => {
             });
           }
         } catch (error) {
-          console.log("err :", error);
+          console.log("err :", error)
         }
       }
-    });
-  }
-
-  const handleUserOrder = (id: number) => {
-    router.push(`/home/user/order/${id}`)
+    })
   }
 
   const deleteUser = (id: number) => {
@@ -169,13 +167,13 @@ const UserSection = () => {
             }
           })
           if (response.status === 200) {
+            getUsers()
             Swal.fire({
               title: "Deleted!",
               text: "The user has been succesfully deleted.",
               icon: "success",
               background: "#18212E",
             });
-            getUsers()
           } else {
             Swal.fire({
               title: "Failed",
@@ -191,10 +189,19 @@ const UserSection = () => {
             text: "An internal error occured during your request",
             icon: "error",
             background: "#18212E",
-          });
+          })
         }
       }
-    });
+    })
+  }
+
+  // Function
+  const handleUserOrder = (id: number) => {
+    router.push(`/home/user/order/${id}`)
+  }
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value)
   }
 
   const filterUser = (option: string) => {
@@ -216,15 +223,9 @@ const UserSection = () => {
     }
   }
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value)
-  }
-
   // Effect
   useEffect(() => {
-    const login = sessionStorage.getItem("login") === "true"
-    const rememberMe = localStorage.getItem("rememberMe") === "true"
-    if (!login && !rememberMe) { router.push("/login") }
+    if (sessionStorage.getItem("login") !== "true" && localStorage.getItem("rememberMe") !== "true") { router.push("/login") }
     getUsers()
   }, [router, getUsers])
 
@@ -239,6 +240,7 @@ const UserSection = () => {
 
   // Undefined
   const [orders] = useState<Orders[]>([])
+  
   return (
     <>
       {isDesktop ? (

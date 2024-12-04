@@ -8,13 +8,29 @@ type TableProps = {
   filterBy: Array<string>
   sortBy: Array<string>
   columns: Array<string>
-  users: Array<{ users_id: number, name: string, email: string, account_status: { name: string }, created_at: string, updated_at: string }>
   totalData: number,
   changeStatusUser: (id: number) => void
   handleUserOrder: (id: number) => void
   deleteUser: (id: number) => void
-  orders: Array<{ transaction_order_id: number, package_laundry: { name: string }, quantity: number, weight: number, status: string, order_date: string, payment_status: string, total_price: number }>
   option: string
+  users: Array<{
+    users_id: number,
+    name: string,
+    email: string,
+    account_status: { name: string },
+    created_at: string,
+    updated_at: string
+  }>
+  orders: Array<{
+    transaction_order_id: number,
+    package_laundry: { name: string },
+    quantity: number,
+    weight: number,
+    status: string,
+    order_date: string,
+    payment_status: string,
+    total_price: number
+  }>
 }
 
 const Table = ({

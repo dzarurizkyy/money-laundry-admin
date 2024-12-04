@@ -9,11 +9,9 @@ import { HeaderSidebar, MenusSideBar, Collapsible } from "@/components"
 type SidebarProps = { page: string }
 
 const Sidebar = ({ page } : SidebarProps) => {
+  const router = useRouter()
   const {open, setOpen} = useSidebar();
   const [activeMenu, setActiveMenu] = useState<string>(`${page}`)
-  
-  const router = useRouter()
-  
   const menus = [
     {title: "Home", icon: <HiOutlineHome/>, activeIcon: <HiHome />, href: "/home"},
     {title: "User Management", icon: <RiUserSearchLine />, activeIcon: <RiUserSearchFill />, href: "/home/user"},

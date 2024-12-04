@@ -13,27 +13,28 @@ import { MobileSize } from "@/components"
 // Import Templates
 import { Login } from "@/pages/templates"
 
-// Improt Context
+// Improt Contexts
 import { useAuth } from "@/context/authContext"
 
 // Import Functions
 import useHandleResize from "@/utils/handleResize"
 
 const LoginPage = () => {
-  // State
-  const [emailInput, setEmailInput] = useState<string>("")
-  const [passInput, setPassInput] = useState<string>("")
-  const [rememberMe, setRememberMe] = useState<boolean>(false)
-  const { setToken } = useAuth()
+  // Router
+  const router = useRouter()
 
   // Util
   const isDesktop = useHandleResize()
 
-  // Router
-  const router = useRouter()
+  // Context
+  const { setToken } = useAuth()
 
-  // Function
-  const rememberLogin = (value: boolean) => setRememberMe(value)
+  // State
+  const [emailInput, setEmailInput] = useState<string>("")
+  const [passInput, setPassInput] = useState<string>("")
+  const [rememberMe, setRememberMe] = useState<boolean>(false)
+  
+  // Axios
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
@@ -73,10 +74,12 @@ const LoginPage = () => {
     }
   }
 
+  // Function
+  const rememberLogin = (value: boolean) => setRememberMe(value)
+
   // Effect
   useEffect(() => {
-    const remember = localStorage.getItem("rememberMe");
-    if (remember === "true") {setRememberMe(true); router.push("/home")}
+    if (localStorage.getItem("rememberMe") === "true") {setRememberMe(true); router.push("/home")}
   }, [router])
 
   return (

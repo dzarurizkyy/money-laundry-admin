@@ -18,7 +18,7 @@ import useHandleResize from "@/utils/handleResize"
 // Import Context
 import { useAuth } from "@/context/authContext"
 
-// Interface
+// Interfaces
 interface User {
   users_id: number,
   name: string,
@@ -43,47 +43,23 @@ const OrderSection = () => {
   // Router
   const router = useRouter()
 
-  // State
+  // Context
   const { token } = useAuth()
 
+  // Util
+  const isDesktop = useHandleResize()
+
+  // State
   const [userID, setUserID] = useState<string>("")
   const [orders, setOrders] = useState<Orders[]>([])
-  const [search, setSearch] = useState<string>("")
-  const [filteredOrders, setFilteredOrders] = useState(orders)
   const [totalOrders, setTotalOrders] = useState<number>(0)
+  const [filteredOrders, setFilteredOrders] = useState(orders)
+  const [search, setSearch] = useState<string>("")
 
   // Variable
   const orderFilterBy = ["baru", "proses", "selesai", "belum", "lunas"]
   const orderSortBy = ["terbaru", "terlama"]
   const orderColumn = ["name", "quantity", "weight", "status", "order_date", "payment", "total_price"]
-
-  const getOrders = useCallback(async () => {
-    try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_URL}/admin/transaction-order/${userID}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      console.log("res:", response)
-      setOrders(response.data.data.transaction_order)
-      setTotalOrders(response.data.data.total_data_transaction)
-
-      if (response.data.data.transaction_order.length === 0) {
-        Swal.fire({
-          icon: "info",
-          title: "No Data Found",
-          text: "There are no orders available",
-          background: "#18212E",
-        });
-        router.push("/home/user")
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  }, [token, userID, router])
-
-  // Util
-  const isDesktop = useHandleResize()
 
   // Function
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -118,11 +94,35 @@ const OrderSection = () => {
     }
   }
 
+  // Axios
+  const getOrders = useCallback(async () => {
+    try {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_URL}/admin/transaction-order/${userID}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      console.log("res:", response)
+      setOrders(response.data.data.transaction_order)
+      setTotalOrders(response.data.data.total_data_transaction)
+
+      if (response.data.data.transaction_order.length === 0) {
+        Swal.fire({
+          icon: "info",
+          title: "No Data Found",
+          text: "There are no orders available",
+          background: "#18212E",
+        });
+        router.push("/home/user")
+      }
+    } catch (error) {
+      console.log("err :", error)
+    }
+  }, [token, userID, router])
+
   // Effect
   useEffect(() => {
-    const login = sessionStorage.getItem("login") === "true"
-    const rememberMe = localStorage.getItem("rememberMe") === "true"
-    if (!login && !rememberMe) { router.push("/login") }
+    if (sessionStorage.getItem("login") !== "true" && localStorage.getItem("rememberMe") !== "true") { router.push("/login") }
     setUserID(String(router.query.slug))
     getOrders()
   }, [router, getOrders])

@@ -24,7 +24,7 @@ import { useAuth } from "@/context/authContext"
 import useHandleResize from "@/utils/handleResize"
 import rupiachCurrencyFormat from "@/utils/rupiahCurrencyFormat"
 
-// Interface
+// Interfaces
 interface TotalTransactions {
   total_order_paid: number,
   total_order: number
@@ -41,22 +41,24 @@ interface weeklyTransaction {
 }
 
 const HomePage = () => {
+  // Router
+  const router = useRouter()
+
+  // Util
+  const isDesktop = useHandleResize()
+
   // Context
   const { open } = useSidebar()
   const { token } = useAuth()
 
+  // State
   const [totalTransactions, setTotalTransactions] = useState<TotalTransactions>({ total_order_paid: 0, total_order: 0 })
   const [transactionMembers, setTransactionMembers] = useState<number>(0)
   const [transactionMemberIncomes, setTransactionMemberIncomes] = useState<number>(0)
   const [usersDistribution, setUsersDistribution] = useState<usersDistribution>({ user_free_percentage: 0, user_paid_percentage: 0 })
   const [weeklyTransaction, setWeeklyTransaction] = useState<weeklyTransaction[]>([])
 
-  // Util
-  const isDesktop = useHandleResize()
-
-  // Router
-  const router = useRouter()
-
+  // Axios
   const getDashboard = useCallback(async () => {
     try {
       const response = await axios.get(`${process.env.NEXT_PUBLIC_URL}/admin/dashboard`, {
@@ -99,9 +101,7 @@ const HomePage = () => {
 
   // Effect
   useEffect(() => {
-    const login = sessionStorage.getItem("login") === "true"
-    const rememberMe = localStorage.getItem("rememberMe") === "true"
-    if (!login && !rememberMe) { router.push("/login") }
+    if (sessionStorage.getItem("login") !== "true" && localStorage.getItem("rememberMe") !== "true") { router.push("/login") }
     getDashboard()
   }, [router, getDashboard])
 
