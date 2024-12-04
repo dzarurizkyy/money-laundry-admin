@@ -13,6 +13,9 @@ import { MobileSize } from "@/components"
 // Import Templates
 import { Login } from "@/pages/templates"
 
+// Improt Context
+import { useAuth } from "@/context/authContext"
+
 // Import Functions
 import useHandleResize from "@/utils/handleResize"
 
@@ -21,7 +24,8 @@ const LoginPage = () => {
   const [emailInput, setEmailInput] = useState<string>("")
   const [passInput, setPassInput] = useState<string>("")
   const [rememberMe, setRememberMe] = useState<boolean>(false)
-  
+  const { setToken } = useAuth()
+
   // Util
   const isDesktop = useHandleResize()
 
@@ -54,9 +58,8 @@ const LoginPage = () => {
         if(rememberMe) {
           localStorage.setItem("rememberMe", "true")
         }
-
-        const token = response.data.data.token
-        localStorage.setItem("token", token)
+        
+        setToken(response.data.data.token)
         localStorage.setItem("login", "true")
         setTimeout(() => {router.push("/home")}, 2000)
       }

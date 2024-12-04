@@ -18,6 +18,9 @@ import useHandleResize from "@/utils/handleResize"
 // Import Responses
 import orderResponse from "@/dummy/orderResponse"
 
+// Import Context
+import { useAuth } from "@/context/authContext"
+
 // Interface
 interface User {
   users_id: number,
@@ -34,7 +37,7 @@ const UserSection = () => {
   const [totalUser, setTotalUser] = useState<number>(0)
   const [filteredUsers, setFilteredUsers] = useState<User[]>([])
   const [search, setSearch] = useState<string>("")
-  const [token, setToken] = useState<string>("")
+  const { token } = useAuth()
 
   // Variable
   const userFilterBy = ["free", "paid"]
@@ -61,7 +64,7 @@ const UserSection = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [token]); 
+  }, [token]);
 
   const changeStatusUser = async (id: number) => {
     const user = users.find(user => user.users_id === id);
@@ -216,11 +219,6 @@ const UserSection = () => {
     if (login !== "true") { router.push("/login") }
     getUsers()
   }, [router, getUsers])
-
-  useEffect(() => {
-    const storedToken = localStorage.getItem("token");
-    if (storedToken) setToken(storedToken);
-  }, []);
 
   useEffect(() => {
     if (search === "") {

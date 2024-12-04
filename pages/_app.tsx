@@ -7,6 +7,7 @@ import Head from "next/head";
 
 // Import SidebarProvider
 import { SidebarProvider } from '@/context/sidebarContext';
+import { AuthProvider } from "@/context/authContext";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const [queryClient] = React.useState(() => new QueryClient());
@@ -17,10 +18,12 @@ const App = ({ Component, pageProps }: AppProps) => {
         <link rel="icon" href="/Icon.png" />
         <title>Money Laundry » Admin</title>
       </Head>
-      <SidebarProvider> {/* Wrap the app with SidebarProvider */}
-        <ReactQueryDevtools />
-        <Component {...pageProps} />
-      </SidebarProvider>
+      <AuthProvider>
+        <SidebarProvider> {/* Wrap the app with SidebarProvider */}
+          <ReactQueryDevtools />
+          <Component {...pageProps} />
+        </SidebarProvider>
+      </AuthProvider>
     </QueryClientProvider>
   );
 };
