@@ -11,7 +11,7 @@ import { TbShoppingBagCheck } from "react-icons/tb"
 import { HiOutlineBanknotes } from "react-icons/hi2"
 
 // Import Components
-import { MobileSize, UserDistributionChart } from "@/components"
+import { MobileSize } from "@/components"
 
 // Import Templates
 import { Sidebar, Home } from "@/pages/templates"
@@ -23,9 +23,6 @@ import { useAuth } from "@/context/authContext"
 // Import Functions
 import useHandleResize from "@/utils/handleResize"
 import rupiachCurrencyFormat from "@/utils/rupiahCurrencyFormat"
-
-// Import Responses
-import transactionResponse from "@/dummy/transactionResponse"
 
 // Interface
 interface TotalTransactions {
@@ -102,8 +99,9 @@ const HomePage = () => {
 
   // Effect
   useEffect(() => {
-    const login = localStorage.getItem("login")
-    if (login !== "true") { router.push("/login") }
+    const login = sessionStorage.getItem("login") === "true"
+    const rememberMe = localStorage.getItem("rememberMe") === "true"
+    if (!login && !rememberMe) { router.push("/login") }
     getDashboard()
   }, [router, getDashboard])
 

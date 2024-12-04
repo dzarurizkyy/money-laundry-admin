@@ -4,6 +4,7 @@ import { useRouter } from "next/router"
 
 // Import Libraries
 import axios from "axios"
+import Swal from "sweetalert2"
 
 // Import Components
 import { MobileSize } from "@/components"
@@ -49,6 +50,7 @@ const OrderSection = () => {
   const [orders, setOrders] = useState<Orders[]>([])
   const [search, setSearch] = useState<string>("")
   const [filteredOrders, setFilteredOrders] = useState(orders)
+  const [totalOrders, setTotalOrders] = useState<number>(0)
 
   // Variable
   const orderFilterBy = ["baru", "proses", "selesai", "belum", "lunas"]
@@ -64,10 +66,21 @@ const OrderSection = () => {
       })
       console.log("res:", response)
       setOrders(response.data.data.transaction_order)
+      setTotalOrders(response.data.data.total_data_transaction)
+
+      if (response.data.data.transaction_order.length === 0) {
+        Swal.fire({
+          icon: "info",
+          title: "No Data Found",
+          text: "There are no orders available",
+          background: "#18212E",
+        });
+        router.push("/home/user")
+      }
     } catch (error) {
       console.log(error)
     }
-  }, [token, userID])
+  }, [token, userID, router])
 
   // Util
   const isDesktop = useHandleResize()
@@ -107,8 +120,9 @@ const OrderSection = () => {
 
   // Effect
   useEffect(() => {
-    const login = localStorage.getItem("login")
-    if (login !== "true") { router.push("/login") }
+    const login = sessionStorage.getItem("login") === "true"
+    const rememberMe = localStorage.getItem("rememberMe") === "true"
+    if (!login && !rememberMe) { router.push("/login") }
     setUserID(String(router.query.slug))
     getOrders()
   }, [router, getOrders])
@@ -121,6 +135,7 @@ const OrderSection = () => {
       setFilteredOrders(searching)
     }
   }, [search, orders])
+
   // Undefined
   const [users] = useState<User[]>([])
   const changeStatusUser = () => { }
@@ -141,7 +156,7 @@ const OrderSection = () => {
             sortBy={orderSortBy}
             columns={orderColumn}
             users={users}
-            totalUser={0}
+            totalData={totalOrders}
             changeStatusUser={changeStatusUser}
             handleUserOrder={handleUserOrder}
             deleteUser={deleteUser}

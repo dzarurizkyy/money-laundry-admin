@@ -222,8 +222,9 @@ const UserSection = () => {
 
   // Effect
   useEffect(() => {
-    const login = localStorage.getItem("login")
-    if (login !== "true") { router.push("/login") }
+    const login = sessionStorage.getItem("login") === "true"
+    const rememberMe = localStorage.getItem("rememberMe") === "true"
+    if (!login && !rememberMe) { router.push("/login") }
     getUsers()
   }, [router, getUsers])
 
@@ -252,7 +253,7 @@ const UserSection = () => {
             sortBy={userSortBy}
             columns={userColumn}
             users={filteredUsers}
-            totalUser={totalUser}
+            totalData={totalUser}
             changeStatusUser={changeStatusUser}
             handleUserOrder={handleUserOrder}
             deleteUser={deleteUser}

@@ -9,7 +9,7 @@ type TableProps = {
   sortBy: Array<string>
   columns: Array<string>
   users: Array<{ users_id: number, name: string, email: string, account_status: { name: string }, created_at: string, updated_at: string }>
-  totalUser: number,
+  totalData: number,
   changeStatusUser: (id: number) => void
   handleUserOrder: (id: number) => void
   deleteUser: (id: number) => void
@@ -18,7 +18,7 @@ type TableProps = {
 }
 
 const Table = ({
-  search, handleSearch, filtering, filterBy, sortBy, columns, users, totalUser,
+  search, handleSearch, filtering, filterBy, sortBy, columns, users, totalData,
   changeStatusUser, handleUserOrder, deleteUser, orders, option
 }: TableProps) => {
 
@@ -27,7 +27,7 @@ const Table = ({
   return (
     <div className={`flex bg-[#18212E] ${open ? "w-[85vw]" : "w-[96vw]"} h-screen justify-center py-6 duration-300`}>
       <div className={`flex flex-col items-center p-7 text-2xl font-semibold ${open ? "w-[75vw]" : "w-[89vw]"} bg-[#121A24] rounded-lg duration-300 shadow-custom gap-y-5`}>
-        <HeaderTable title={option && option.charAt(0).toUpperCase() + option.slice(1)} totalData={option === "user" ? (totalUser) : (orders && orders.length)} />
+        <HeaderTable title={option && option.charAt(0).toUpperCase() + option.slice(1)} totalData={totalData} />
         <div className="flex justify-between items-center w-full mt-3">
           <SearchTable title={option} search={search} handleSearch={handleSearch} />
           <div className="flex gap-x-2">

@@ -43,8 +43,6 @@ const LoginPage = () => {
         password: passInput
       })
       
-      console.log("res :", response)
-
       if(response.status === 200) {
         toast.success("Login Success! Redirecting...", { 
           style: { 
@@ -60,7 +58,7 @@ const LoginPage = () => {
         }
         
         setToken(response.data.data.token)
-        localStorage.setItem("login", "true")
+        sessionStorage.setItem("login", "true")
         setTimeout(() => {router.push("/home")}, 2000)
       }
     } catch (error) {
