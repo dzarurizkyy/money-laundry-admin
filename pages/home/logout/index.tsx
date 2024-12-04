@@ -7,6 +7,7 @@ const Logout = () => {
   useEffect(() => {
     localStorage.removeItem("login")
     localStorage.removeItem("rememberMe")
+    localStorage.removeItem("token")
     router.push("/login")
   }, [router])
   
