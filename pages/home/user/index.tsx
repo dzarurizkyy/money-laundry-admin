@@ -55,7 +55,7 @@ const UserSection = () => {
   const [search, setSearch] = useState<string>("")
 
   // Variable
-  const userFilterBy = ["free", "paid"]
+  const userFilterBy = ["basic", "silver", "gold"]
   const userSortBy = ["newest", "oldest"]
   const userColumn = ["name", "email", "status", "created_at", "updated_at", "action"]
 
@@ -77,10 +77,10 @@ const UserSection = () => {
 
   const changeStatusUser = async (id: number) => {
     const user = users.find(user => user.users_id === id);
-    if (!user || user.account_status.name === "paid") {
+    if (!user || user.account_status.name === "silver" || user.account_status.name === "gold") {
       Swal.fire({
         title: "No Change!",
-        text: "No changes were made to the user status.",
+        text: "No changes were made to the user status",
         icon: "error",
         background: "#18212E",
       });
@@ -94,8 +94,8 @@ const UserSection = () => {
             <div class="select-wrapper">
               <select id="subscription" class="swal2-input border border-gray-400 rounded-lg text-gray-400 bg-[#18212E] w-full cursor-pointer">
                 <option value="" disabled selected>Select subscription duration</option>
-                <option value="1">1 Month</option>
-                <option value="3">3 Month</option>
+                <option value="2">Silver</option>
+                <option value="3">Gold</option>
               </select>
             </div>
           </div>
@@ -108,14 +108,12 @@ const UserSection = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const element = document.getElementById("subscription") as HTMLSelectElement
-        const price = element?.value === "1" ? 50000 : 130000
 
         try {
           const response = await axios.post(`${process.env.NEXT_PUBLIC_URL}/admin/transaction-member`,
             {
               users_id: Number(id),
-              subscription_range: Number(element?.value),
-              total_price: Number(price)
+              account_status_id: Number(element?.value),
             },
             {
               headers: {
@@ -206,11 +204,14 @@ const UserSection = () => {
 
   const filterUser = (option: string) => {
     switch (option) {
-      case "paid":
-        setFilteredUsers(users.filter(user => user.account_status.name === "paid"))
+      case "basic":
+        setFilteredUsers(users.filter(user => user.account_status.name === "basic"))
         break;
-      case "free":
-        setFilteredUsers(users.filter(user => user.account_status.name === "free"))
+      case "silver":
+        setFilteredUsers(users.filter(user => user.account_status.name === "silver"))
+        break;
+      case "gold":
+        setFilteredUsers(users.filter(user => user.account_status.name === "gold"))
         break;
       case "newest":
         setFilteredUsers([...users].sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()))
@@ -240,7 +241,7 @@ const UserSection = () => {
 
   // Undefined
   const [orders] = useState<Orders[]>([])
-  
+
   return (
     <>
       {isDesktop ? (
