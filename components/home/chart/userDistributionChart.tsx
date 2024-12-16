@@ -4,8 +4,9 @@ import { TooltipItem } from "chart.js"
 
 type UserDistributionChartProps = {
   distributions: {
-    user_free_percentage: number,
-    user_paid_percentage: number
+    user_basic_percentage: number,
+    user_silver_percentage: number,
+    user_gold_percentage: number,
   }
 }
 
@@ -25,12 +26,13 @@ const UserDistributionChart = ({ distributions }: UserDistributionChartProps) =>
         chartInstance.current = new Chart<'pie', number[], string>(ctx, {
           type: "pie",
           data: {
-            labels: ["Free", "Paid"],
+            labels: ["Basic", "Silver", "Gold"],
             datasets: [{
-              data: [distributions?.user_free_percentage, distributions?.user_paid_percentage],
+              data: [distributions?.user_basic_percentage, distributions?.user_silver_percentage, distributions?.user_gold_percentage],
               backgroundColor: [
+                "#7373D3",
+                "#B6B2FB",
                 "#C8C2FC",
-                "#7771F6"
               ],
               borderWidth: 0
             }]

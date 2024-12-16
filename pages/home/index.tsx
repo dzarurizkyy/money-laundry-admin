@@ -31,8 +31,9 @@ interface TotalTransactions {
 }
 
 interface usersDistribution {
-  user_free_percentage: number,
-  user_paid_percentage: number,
+  user_basic_percentage: number,
+  user_silver_percentage: number,
+  user_gold_percentage: number,
 }
 
 interface weeklyTransaction {
@@ -55,7 +56,7 @@ const HomePage = () => {
   const [totalTransactions, setTotalTransactions] = useState<TotalTransactions>({ total_order_paid: 0, total_order: 0 })
   const [transactionMembers, setTransactionMembers] = useState<number>(0)
   const [transactionMemberIncomes, setTransactionMemberIncomes] = useState<number>(0)
-  const [usersDistribution, setUsersDistribution] = useState<usersDistribution>({ user_free_percentage: 0, user_paid_percentage: 0 })
+  const [usersDistribution, setUsersDistribution] = useState<usersDistribution>({ user_basic_percentage: 0, user_silver_percentage: 0, user_gold_percentage: 0 })
   const [weeklyTransaction, setWeeklyTransaction] = useState<weeklyTransaction[]>([])
 
   // Axios

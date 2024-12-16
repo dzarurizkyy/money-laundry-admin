@@ -4,7 +4,7 @@ type HomeProps = {
   open: boolean
   cards: Array<{ title: string; icon: JSX.Element; selectedData: string; totalData: string }>
   transactions: Array<{ order_day: string, total_transaction: number }>
-  distributions: {user_free_percentage: number, user_paid_percentage: number}
+  distributions: {user_basic_percentage: number, user_silver_percentage: number, user_gold_percentage: number}
 }
 
 const Home = ({ open, transactions, distributions, cards }: HomeProps) => {
