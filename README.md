@@ -1,12 +1,17 @@
 # Money Laundry Admin Website 🫧👕
 This is an admin website designed for managing and monitoring operations of Money Laundry App. This website is built using Next JS and Tailwind CSS.
 
+<br>
+<p align="center">
+<img src="https://iili.io/2DNk0dP.webp" width="180">
+</p>
+<br>
+
 ## Related Repositories 🔗
 - [Money Laundry App](https://github.com/Bahauddinnafis/money-laundry-mobile) 📱
 - [Money Laundry API](https://github.com/RaflyAmartharizqi/money-laundry-api) 🛠️
 
 ## Routes 📍
-
   Route                    | Description                                             
 |--------------------------|---------------------------------------------------------|
 | `/login`                 | Route for user login.                                   |
@@ -20,7 +25,7 @@ This is an admin website designed for managing and monitoring operations of Mone
   <p><img src="https://i.ibb.co.com/chYMPT9/Screenshot-2024-11-11-094951.png" alt="Screenshot-2024-11-11-094951" width="700"></p>
 
 - <h3>Home Page</h3>
-  <p><img src="https://i.ibb.co.com/bPBgCjH/Screenshot-2024-11-11-121040.png" alt="Screenshot-2024-11-11-094951" width="700"></p>
+  <p><img src="https://iili.io/2DNNvku.md.png" alt="Screenshot-2024-11-11-094951" width="700"></p>
 
 - <h3>Detail Page</h3>
   <p><img src="https://i.ibb.co.com/TMF4cFR/Screenshot-2024-11-11-095415.png" width="700"></p>
