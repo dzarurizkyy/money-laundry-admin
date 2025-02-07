@@ -5,11 +5,6 @@ This is an admin website designed for managing and monitoring operations of Mone
 <p align="center">
 <img src="https://iili.io/2DNk0dP.webp" width="180">
 </p>
-<br>
-
-## Related Repositories 🔗
-- [Money Laundry App](https://github.com/Bahauddinnafis/money-laundry-mobile) 📱
-- [Money Laundry API](https://github.com/RaflyAmartharizqi/money-laundry-api) 🛠️
 
 ## Routes 📍
   Route                    | Description                                             
@@ -84,6 +79,10 @@ This is an admin website designed for managing and monitoring operations of Mone
 - [React Toastify](https://fkhadra.github.io/react-toastify/installation/)          : A library for easy notifications using toast messages in React.
 - [SweetAlert2](https://sweetalert2.github.io/#download)                            : A library to create beautiful, customizable alerts and modals.
 - [Chart.js](https://www.chartjs.org/docs/latest/getting-started/installation.html) : A library for creating interactive and customizable charts and graphs.
+
+## Related Repositories 📌
+- [Money Laundry App](https://github.com/Bahauddinnafis/money-laundry-mobile) 📱
+- [Money Laundry API](https://github.com/RaflyAmartharizqi/money-laundry-api) 🛠️
 
 ## Contributor 🤝
 - [Dzaru Rizky Fathan Fortuna](https://www.linkedin.com/in/dzarurizky/)
